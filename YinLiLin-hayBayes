@@ -4,5 +4,5 @@ geno = data$geno
 pheno<-read.table("pheno_path",header=F) ####表型要求一列，只有数字
 fit <- bayes(y=pheno[, 1], X=geno, model="BayesR", niter=20000, nburn=10000, outfreq=10, verbose=TRUE)
 SNPeffect <- fit$g
-gebv <- geno %*% SNPeffect    # calculate the estimated genomic breeding value 
+gebv <- as.matrix(geno) %*% SNPeffect    # calculate the estimated genomic breeding value 
 cor(gebv,pheno) ##预测准确性（真实和预测值的相关系数）
